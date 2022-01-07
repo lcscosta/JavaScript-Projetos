@@ -11,12 +11,18 @@ for(i=0; i < number.length; i++){
         var string = input.innerHTML;
         var last = string[string.length -1 ];
 
-        input.innerHTML += e.target.innerHTML;
-
-        if(e.target.innerHTML === "C"){
-          input.innerHTML = "";  
+        if(resultDisplayed === false){
+            input.innerHTML += e.target.innerHTML;
+        }else if (resultDisplayed === true && last === "+" || "-" || "×" || "÷"){
+            resultDisplayed = false;
+            input.innerHTML += e.target.innerHTML;
+        } else {
+            resultDisplayed = false;
+            
+            input.innerHTML = "";  
+            input.innerHTML += e.target.innerHTML;  
         }
-    })
+    });
 }
 
 // Adicionar a ação após o click em cada um dos operadores
@@ -25,8 +31,12 @@ for(i=0; i < operator.length; i++){
         var string = input.innerHTML;
         var last = string[string.length -1 ];
 
-        input.innerHTML += e.target.innerHTML;
-    })
+        if(last === "+" || "-" || "×" || "÷" && string[string.length - 2] === "+" || "-" || "×" || "÷" ){
+            var nstring = string.substring(0, string.length);
+            console.log(nstring);
+            input.innerHTML = nstring;
+        }
+    });
 }
 
 equal.addEventListener("click", function(e){
